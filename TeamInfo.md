@@ -1,7 +1,7 @@
 **Basic Information**
 
 | Info	| Description |
-|---------------------|
+|--------|------------|
 |TeamID |	Team-024 |
 |TeamName |	sapientialQuadralofLares |
 |Captain | Jacob Poeschel |
