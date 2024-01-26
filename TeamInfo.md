@@ -6,7 +6,7 @@
 |TeamName |	sapientialQuadralofLares |
 |Captain | Jacob Poeschel |
 |Captain |	jacobop2@illinois.edu |
-|Member1 |	Michael RHeintgen |
+|Member1 |	Michael Rheintgen |
 |Member1 |	mar13@illinois.edu |
 |Member2 |	Paul Jablonski |
 |Member2 |	pjj3@illinois.edu |
