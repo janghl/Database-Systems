@@ -3,7 +3,7 @@
 | Info	| Description |
 |--------|------------|
 |TeamID |	Team-024 |
-|TeamName |	sapientialQuadralofLares |
+|TeamName |	IlliniHarmonics |
 |Captain | Jacob Poeschel |
 |Captain |	jacobop2@illinois.edu |
 |Member1 |	Michael Rheintgen |
