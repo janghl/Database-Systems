@@ -1,4 +1,4 @@
-**024-Illini Harmonics**
+**024-IlliniHarmonics**
 
 **Permission**
 Make your repository private. TAs will be able to access it even if it's private.
