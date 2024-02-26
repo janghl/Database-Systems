@@ -40,7 +40,7 @@ Songid -> songname, artistname, length, listens, genre, populartags
 All of our functional dependencies satisfy the BCNF conditions because each key on the left side is a candidate key. These keys can be used to obtain all necessary information, meaning that there are no troublesome FDs, and our design meets BCNF criteria.
 
 
-** Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
+**Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
 
 Table-UserAccounts(userid:INT [PK], username:VARCHAR(255), password:VARCHAR(255))
 
