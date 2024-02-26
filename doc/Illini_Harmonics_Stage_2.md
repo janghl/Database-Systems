@@ -1,8 +1,8 @@
 
-**ILLINI HARMONICS**
-**Problem Track 1.2**
+# **ILLINI HARMONICS**
+# **Problem Track 1.2**
 
-**Explain your assumptions for each entity and relationship in your model. Discuss why you've modeled something as an entity rather than an attribute of another entity. Describe the cardinality of relationships, like why a student is linked to only one advisor. These assumptions might come from customer requirements or application constraints. Please clarify them.**
+## **Explain your assumptions for each entity and relationship in your model. Discuss why you've modeled something as an entity rather than an attribute of another entity. Describe the cardinality of relationships, like why a student is linked to only one advisor. These assumptions might come from customer requirements or application constraints. Please clarify them.**
 
 General:
 In general, we aimed to create entities for sets of data easily grouped together. Additionally, any sets with many to many relations were forced into entities as well. 
@@ -26,7 +26,7 @@ The Artists entity is necessary to contain information which could be used for s
 
 
 
-**Normalize your database. Apply BCNF or 3NF to your schema or show that your schema adheres to one of these normal forms. Describe why you choose to use BCNF vs 3NF.**
+## **Normalize your database. Apply BCNF or 3NF to your schema or show that your schema adheres to one of these normal forms. Describe why you choose to use BCNF vs 3NF.**
 	
 Since our dataset is extremely large, the most important priority is to reduce redundancy. In our project, redundant keys may heavily impact performance. Additionally, we have intentionally chosen entities and dependencies which will always be lossless. So, the optimal normalization for us is the BCNF normalization. With BCNF, we will focus on eliminating all unnecessary FDs and maximize the efficiency and performance of our database.
 
@@ -44,7 +44,7 @@ All of our functional dependencies satisfy the BCNF conditions because each key 
 
 
 
-**Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
+## **Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
 
 Table-UserAccounts(userid:INT [PK], username:VARCHAR(255), password:VARCHAR(255))
 
