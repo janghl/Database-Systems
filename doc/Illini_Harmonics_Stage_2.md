@@ -24,6 +24,8 @@ Artists:
 The Artists entity is necessary to contain information which could be used for sorting or recommendations. The Artists table is linked to the Songs table in a many to many relationship because each song could have multiple artists and every artist could have multiple songs. 
 
 
+
+
 **Normalize your database. Apply BCNF or 3NF to your schema or show that your schema adheres to one of these normal forms. Describe why you choose to use BCNF vs 3NF.**
 	
 Since our dataset is extremely large, the most important priority is to reduce redundancy. In our project, redundant keys may heavily impact performance. Additionally, we have intentionally chosen entities and dependencies which will always be lossless. So, the optimal normalization for us is the BCNF normalization. With BCNF, we will focus on eliminating all unnecessary FDs and maximize the efficiency and performance of our database.
@@ -38,6 +40,8 @@ Songid -> songname, artistname, length, listens, genre, populartags
 
 
 All of our functional dependencies satisfy the BCNF conditions because each key on the left side is a candidate key. These keys can be used to obtain all necessary information, meaning that there are no troublesome FDs, and our design meets BCNF criteria.
+
+
 
 
 **Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
