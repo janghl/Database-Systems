@@ -48,11 +48,11 @@ All of our functional dependencies satisfy the BCNF conditions because each key 
 
 Table-UserAccounts(userid:INT [PK], username:VARCHAR(255), password:VARCHAR(255))
 
-Table-Posts(postid:INT [PK], userid:INT [FK to UserAccounts.userid], songid:INT [FK to Songs.songid], rating:INT, timeofpost:DOUBLE, usertags:VARCHAR(255))
+Table-Posts(postid:INT [PK], rating:INT, timeofpost:DOUBLE, usertags:VARCHAR(255))
 
-Table-Tags(tagid:INT [PK], songid:INT [FK to Songs.songid], tag:VARCHAR(20), count:INT)
+Table-Tags(tagid:INT [PK], tag:VARCHAR(20), count:INT)
 
-Table-Songs(songid:INT [PK], songname:VARCHAR(255), artistid:INT [FK to Artists.artistid], length:INT, listens:DOUBLE, genre:VARCHAR(20), populartags:VARCHAR(100))
+Table-Songs(songid:INT [PK], songname:VARCHAR(255), length:INT, listens:DOUBLE, genre:VARCHAR(20), populartags:VARCHAR(100))
 
 Table-Artists(artistid:INT [PK], firstname:VARCHAR(255), lastname:VARCHAR(255), age:INT, description:VARCHAR(255))
 
