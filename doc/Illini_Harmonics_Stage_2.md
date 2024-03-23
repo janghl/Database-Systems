@@ -33,9 +33,13 @@ Since our dataset is extremely large, the most important priority is to reduce r
 
 FDs:
 Userid -> username, password
+
 Artistid -> artistname, age, description
-Postid -> rating, timeofpost, username, songname, tag
-Tagid -> songname, tag, count
+
+Postid -> rating, timeofpost, songname
+
+Tagid -> tag, count
+
 Songid -> songname, artistname, length, listens, genre, populartags
 
 
