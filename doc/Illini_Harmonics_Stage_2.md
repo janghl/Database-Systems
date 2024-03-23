@@ -56,3 +56,10 @@ Table-Songs(songid:INT [PK], songname:VARCHAR(255), artistid:INT [FK to Artists.
 
 Table-Artists(artistid:INT [PK], firstname:VARCHAR(255), lastname:VARCHAR(255), age:INT, description:VARCHAR(255))
 
+Table-Create(username:VARCHAR(40), postid:INT [FK to Posts.postid], tagid:INT [FK to Tags.tagid] (postid, tagid [PK])
+
+Table-Have_Many(songname:VARCHAR(255), songid:INT [FK to Songs.songid], tagid:INT [FK to Tags.tagid] (songid, tagid [PK])
+
+Table-Friends(userid:INT [FK to UserAccounts.userid], userid:INT [FK to UserAccounts.userid] (userid, userid[PK])
+
+Table-HasSongs(artistid:INT [FK to Artists.artistid], songid:INT [FK to Songs.songid] (artistid, songid[PK])
