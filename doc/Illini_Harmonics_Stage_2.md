@@ -23,6 +23,21 @@ Originally, we were going to use Tags as an attribute of both Songs and Posts. H
 Artists:
 The Artists entity is necessary to contain information which could be used for sorting or recommendations. The Artists table is linked to the Songs table in a many to many relationship because each song could have multiple artists and every artist could have multiple songs. 
 
+Create:
+The Create entity is an entity that relates both Posts and Tags, where the user-created posts may tag a song according to a tag from the Tags table. Thus, the relation is drawn that the post creates a new tag, or multiple tags, for the song that is contained in it.
+
+Friends:
+The Friends entity relates User Accounts to itself, as some users may store other users as friends that you can view feed from.
+
+Has_songs:
+The Has_song relation relates Artists and Songs as music artists have a list of songs that belong to them and are authored by them, this allows for our website to display both the author and related song at once for things such as posts or a music directory.
+
+Listening_History:
+The Listening_History relation relates User_Accounts to Songs, as users have a list of songs that are going to be retrieved from the Spotify API that they've listened to. This retrieved list will then be converted and stored through this relation.
+
+Have_Many:
+The Have_Many relation relates Songs to Tags, as songs may have an overall variety of tags that have been accumulated through user posts.
+
 
 
 
@@ -64,6 +79,8 @@ Table-Create(username:VARCHAR(40), postid:INT [FK to Posts.postid], tagid:INT [F
 
 Table-Have_Many(songname:VARCHAR(255), songid:INT [FK to Songs.songid], tagid:INT [FK to Tags.tagid] (songid, tagid [PK])
 
+Table-Listening_History(userid:INT [FK to UserAccounts.userid], songid:INT [FK to Songs.songid] (userid, songid [PK])
+
 Table-Friends(userid:INT [FK to UserAccounts.userid], userid:INT [FK to UserAccounts.userid] (userid, userid[PK])
 
-Table-HasSongs(artistid:INT [FK to Artists.artistid], songid:INT [FK to Songs.songid] (artistid, songid[PK])
+Table-Has_Songs(artistid:INT [FK to Artists.artistid], songid:INT [FK to Songs.songid] (artistid, songid[PK])
