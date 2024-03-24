@@ -51,11 +51,11 @@ Userid -> username, password
 
 Artistid -> artistname, age, description
 
-Postid -> rating, timeofpost, songname
+Postid -> rating, timeofpost, usertags
 
 Tagid -> tag, count
 
-Songid -> songname, artistname, length, listens, genre, populartags
+Songid -> songname, length, listens, genre, populartags
 
 
 All of our functional dependencies satisfy the BCNF conditions because each key on the left side is a candidate key. These keys can be used to obtain all necessary information, meaning that there are no troublesome FDs, and our design meets BCNF criteria.
