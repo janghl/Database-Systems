@@ -13,6 +13,7 @@ Written MD (Schema) changes:
 UML Diagram changes:
 - Removed foreign keys from tables
 - Corrected the user_account to song relation to be many-many
+- Removed extraneous attributes from some tables (e.g. populartags, usertags, etc.)
 
 
 
