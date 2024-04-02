@@ -14,6 +14,7 @@ UML Diagram changes:
 - Removed foreign keys from tables
 - Corrected the user_account to song relation to be many-many
 - Removed extraneous attributes from some tables (e.g. populartags, usertags, etc.)
+- Removed Have Many relational table as it was redundant
 
 
 
