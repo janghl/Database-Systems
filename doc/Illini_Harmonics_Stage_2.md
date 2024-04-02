@@ -77,8 +77,6 @@ Table-Artists(artistid:INT [PK], artistname:VARCHAR(255), genre:VARCHAR(20))
 
 Table-Create(username:VARCHAR(40), postid:INT [FK to Posts.postid], tagid:INT [FK to Tags.tagid] (postid, tagid [PK])
 
-Table-Have_Many(songname:VARCHAR(255), songid:INT [FK to Songs.songid], tagid:INT [FK to Tags.tagid] (songid, tagid [PK])
-
 Table-Listening_History(userid:INT [FK to UserAccounts.userid], songid:INT [FK to Songs.songid] (userid, songid [PK])
 
 Table-Friends(userid:INT [FK to UserAccounts.userid], userid:INT [FK to UserAccounts.userid] (userid, userid[PK])
