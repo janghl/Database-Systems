@@ -62,20 +62,20 @@ All of our functional dependencies satisfy the BCNF conditions because each key 
 
 ## **Convert your conceptual database design (ER/UML) to the logical design (relational schema). Note that a relational schema is NOT an SQL DDL command.**
 
-Table-UserAccounts(userid:INT [PK], username:VARCHAR(255), password:VARCHAR(255))
+Table-UserAccounts(userid:VARCHAR(20) [PK], username:VARCHAR(255), password:VARCHAR(255))
 
-Table-Posts(postid:INT [PK], rating:INT, timeofpost:VARCHAR(20), likes:INT)
+Table-Posts(postid:VARCHAR(20) [PK], rating:INT, timeofpost:VARCHAR(20), likes:INT)
 
-Table-Tags(tagid:INT [PK], tagname:VARCHAR(20))
+Table-Tags(tagid:VARCHAR(20) [PK], tagname:VARCHAR(20))
 
-Table-Songs(songid:INT [PK], songname:VARCHAR(255), length:INT, popularity:INT)
+Table-Songs(songid:VARCHAR(50) [PK], songname:VARCHAR(255), length:INT, popularity:INT)
 
-Table-Artists(artistid:INT [PK], artistname:VARCHAR(255), genre:VARCHAR(20))
+Table-Artists(artistid:VARCHAR(50) [PK], artistname:VARCHAR(255), genre:VARCHAR(20))
 
-Table-Create(username:VARCHAR(40), postid:INT [FK to Posts.postid], tagid:INT [FK to Tags.tagid] (postid, tagid [PK])
+Table-Create(postid:VARCHAR(20) [FK to Posts.postid], tagid:VARCHAR(20) [FK to Tags.tagid] (postid, tagid [PK])
 
-Table-Listening_History(userid:INT [FK to UserAccounts.userid], songid:INT [FK to Songs.songid] (userid, songid [PK])
+Table-Listening_History(userid:VARCHAR(20) [FK to UserAccounts.userid], songid:VARCHAR(50) [FK to Songs.songid] (userid, songid [PK])
 
-Table-Friends(userid:INT [FK to UserAccounts.userid], userid:INT [FK to UserAccounts.userid] (userid, userid[PK])
+Table-Friends(userid:VARCHAR(20) [FK to UserAccounts.userid], userid:VARCHAR(20) [FK to UserAccounts.userid] (userid, userid[PK])
 
-Table-Has_Songs(artistid:INT [FK to Artists.artistid], songid:INT [FK to Songs.songid] (artistid, songid[PK])
+Table-Has_Songs(artistid:VARCHAR(50) [FK to Artists.artistid], songid:VARCHAR(50) [FK to Songs.songid] (artistid, songid[PK])
