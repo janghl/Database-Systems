@@ -49,13 +49,13 @@ Since our dataset is extremely large, the most important priority is to reduce r
 FDs:
 Userid -> username, password
 
-Artistid -> artistname, age, description
+Artistid -> artistname, genre
 
 Postid -> rating, timeofpost, usertags
 
 Tagid -> tag, count
 
-Songid -> songname, length, listens, genre, populartags
+Songid -> songname, length, popularity, populartag
 
 
 All of our functional dependencies satisfy the BCNF conditions because each key on the left side is a candidate key. These keys can be used to obtain all necessary information, meaning that there are no troublesome FDs, and our design meets BCNF criteria.
@@ -71,9 +71,9 @@ Table-Posts(postid:INT [PK], rating:INT, timeofpost:DOUBLE, usertags:VARCHAR(255
 
 Table-Tags(tagid:INT [PK], tag:VARCHAR(20), count:INT)
 
-Table-Songs(songid:INT [PK], songname:VARCHAR(255), length:INT, listens:DOUBLE, genre:VARCHAR(20), populartags:VARCHAR(100))
+Table-Songs(songid:INT [PK], songname:VARCHAR(255), length:INT, popularity:INT, populartag:VARCHAR(100))
 
-Table-Artists(artistid:INT [PK], firstname:VARCHAR(255), lastname:VARCHAR(255), age:INT, description:VARCHAR(255))
+Table-Artists(artistid:INT [PK], artistname:VARCHAR(255), genre:VARCHAR(20),)
 
 Table-Create(username:VARCHAR(40), postid:INT [FK to Posts.postid], tagid:INT [FK to Tags.tagid] (postid, tagid [PK])
 
