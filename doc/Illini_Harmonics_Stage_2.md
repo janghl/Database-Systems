@@ -35,9 +35,6 @@ The Has_song relation relates Artists and Songs as music artists have a list of 
 Listening_History:
 The Listening_History relation relates User_Accounts to Songs, as users have a list of songs that are going to be retrieved from the Spotify API that they've listened to. This retrieved list will then be converted and stored through this relation.
 
-Have_Many:
-The Have_Many relation relates Songs to Tags, as songs may have an overall variety of tags that have been accumulated through user posts.
-
 
 
 
