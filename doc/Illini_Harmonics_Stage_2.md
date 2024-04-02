@@ -51,7 +51,7 @@ Userid -> username, password
 
 Artistid -> artistname, genre
 
-Postid -> rating, timeofpost
+Postid -> rating, timeofpost, likes
 
 Tagid -> tagname
 
@@ -67,7 +67,7 @@ All of our functional dependencies satisfy the BCNF conditions because each key 
 
 Table-UserAccounts(userid:INT [PK], username:VARCHAR(255), password:VARCHAR(255))
 
-Table-Posts(postid:INT [PK], rating:INT, timeofpost:DOUBLE)
+Table-Posts(postid:INT [PK], rating:INT, timeofpost:DOUBLE, likes:INT)
 
 Table-Tags(tagid:INT [PK], tagname:VARCHAR(20))
 
