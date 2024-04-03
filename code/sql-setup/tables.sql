@@ -16,59 +16,59 @@ CREATE TABLE Songs (
   PRIMARY KEY (songid)
 );
 
-CREATE TABLE Posts (
-  postid VARCHAR(20),
-  rating INT,
-  timeofpost VARCHAR(20),
-  likes INT,
-  userid VARCHAR(20),
-  songid VARCHAR(50),
-  FOREIGN KEY (userid) REFERENCES UserAccounts.userid ON DELETE CASCADE,
-  FOREIGN KEY (songid) REFERENCES UserAccounts.songid ON DELETE CASCADE,
-  PRIMARY KEY (postid)
-);
-
 CREATE TABLE UserAccounts (
-  userid VARCHAR(20),
+  userid INT,
   username VARCHAR(255),
   passwd VARCHAR(255),
   PRIMARY KEY (userid)
 );
 
+CREATE TABLE Posts (
+  postid INT,
+  rating INT,
+  timeofpost VARCHAR(20),
+  likes INT,
+  userid VARCHAR(20),
+  songid VARCHAR(50),
+  CONSTRAINT FK_userid FOREIGN KEY (userid) REFERENCES UserAccounts(userid) ON DELETE CASCADE,
+  CONSTRAINT FK_songid FOREIGN KEY (songid) REFERENCES Songs(songid) ON DELETE CASCADE,
+  PRIMARY KEY (postid)
+);
+
 CREATE TABLE Tags (
-  tagid VARCHAR(20),
+  tagid INT,
   tagname VARCHAR(20),
   PRIMARY KEY (tagid)
 );
 
 CREATE TABLE Creates (
-  postid VARCHAR(20),
-  tagid VARCHAR(20),
-  FOREIGN KEY (postid) REFERENCES Posts.postid ON DELETE CASCADE,
-  FOREIGN KEY (tagid) REFERENCES Tags.tagid ON DELETE CASCADE,
+  postid INT,
+  tagid INT,
+  CONSTRAINT FK_postid FOREIGN KEY (postid) REFERENCES Posts(postid) ON DELETE CASCADE,
+  CONSTRAINT FK_tagid FOREIGN KEY (tagid) REFERENCES Tags(tagid) ON DELETE CASCADE,
   PRIMARY KEY (postid, tagid)
 );
 
 CREATE TABLE ListeningHistories (
-  userid VARCHAR(20),
+  userid INT,
   songid VARCHAR(50),
-  FOREIGN KEY (userid) REFERENCES UserAccounts.userid ON DELETE CASCADE,
-  FOREIGN KEY (songid) REFERENCES Songs.songid ON DELETE CASCADE,
+  CONSTRAINT FK_userid FOREIGN KEY (userid) REFERENCES UserAccounts(userid) ON DELETE CASCADE,
+  CONSTRAINT FK_songid FOREIGN KEY (songid) REFERENCES Songs(songid) ON DELETE CASCADE,
   PRIMARY KEY (userid, songid)
 );
 
 CREATE TABLE Friends (
-  userid1 VARCHAR(20),
-  userid2 VARCHAR(20),
-  FOREIGN KEY (userid1) REFERENCES UserAccounts.userid ON DELETE CASCADE,
-  FOREIGN KEY (userid2) REFERENCES UserAccounts.userid ON DELETE CASCADE,
+  userid1 INT,
+  userid2 INT,
+  CONSTRAINT FK_userid1 FOREIGN KEY (userid1) REFERENCES UserAccounts(userid) ON DELETE CASCADE,
+  CONSTRAINT FK_userid2 FOREIGN KEY (userid2) REFERENCES UserAccounts(userid) ON DELETE CASCADE,
   PRIMARY KEY (userid1, userid2)
 );
 
 CREATE TABLE HasSongs (
   artistid VARCHAR(50),
   songid VARCHAR(50),
-  FOREIGN KEY (artistid) REFERENCES Artists.artistid ON DELETE CASCADE,
-  FOREIGN KEY (songid) REFERENCES Songs.songid ON DELETE CASCADE,
+  CONSTRAINT FK_artistid FOREIGN KEY (artistid) REFERENCES Artists(artistid) ON DELETE CASCADE,
+  CONSTRAINT FK_songid FOREIGN KEY (songid) REFERENCES Songs(songid) ON DELETE CASCADE,
   PRIMARY KEY (artistid, songid)
 );
