@@ -1,8 +1,8 @@
 tagid,tagname
-00000000,Happy
-00000001,Sad
-00000002,Hype
-00000003,Party
-00000004,Loud
-00000005,Love
-00000006,Angry
+0,Happy
+1,Sad
+2,Hype
+3,Party
+4,Loud
+5,Love
+6,Angry

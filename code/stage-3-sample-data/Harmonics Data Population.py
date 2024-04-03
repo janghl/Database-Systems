@@ -119,7 +119,7 @@ while (u < 1250):
     if username in usedusernames:                                                                           # Check for duplicate username entries
         continue
     else:
-        userdata.append([str(u).zfill(8), username, password])
+        userdata.append([u, username, password])
         usedusernames.append(username)
         u += 1
 
@@ -142,10 +142,10 @@ for i in range(5000):                                                           
     timeofpost = str(random.randrange(1, 13)).zfill(2) + '/' + str(random.randrange(1, 28)) + '/' + str(random.randrange(2020, 2025)) + ' ' + str(random.randrange(0, 24)).zfill(2) + ':' + str(random.randrange(0, 60)).zfill(2)
     rating = random.randrange(0, 6)
     likes = random.randrange(0, 750)
-    postuserid = str(random.randrange(0, 1250)).zfill(8)                                                    # Generate a random user id
+    postuserid = random.randrange(0, 1250)                                                                  # Generate a random user id
     postsongid = songid[random.randrange(len(songid))]                                                      # Generate a random song id
 
-    postdata.append([str(i).zfill(8), rating, timeofpost, likes, postuserid, postsongid])
+    postdata.append([i, rating, timeofpost, likes, postuserid, postsongid])
 
 print('Post data compiled with length of:', len(postdata))                                                  # Print complete statement
 print(postdata[1])
@@ -165,7 +165,7 @@ tagdata = [['tagid', 'tagname']]
 tags = ['Happy', 'Sad', 'Hype', 'Party', 'Loud', 'Love', 'Angry']                                           # Basic tags for now
 
 for i in range(len(tags)):                                                                                  # Loop through all tags
-    tagdata.append([str(i).zfill(8), tags[i]])
+    tagdata.append([i, tags[i]])
 
 print('Tag data compiled with length of:', len(tagdata))                                                    # Print complete statement
 print(tagdata[1])
@@ -185,7 +185,7 @@ listeninghistorydata = [['userid', 'songid']]
 
 for i in range(1250):                                                                                       # Loop through all users
     for j in range(random.randrange(10, 51)):                                                               # Loop through random amount of songs from 10-50
-        user = str(i).zfill(8)                                                                              # Obtain user ID
+        user = i                                                                                            # Obtain user ID
         song = songid[random.randrange(0, len(songid))]                                                     # Pick a random song ID
 
         if [user, song] not in listeninghistorydata:                                                        # Ensure no duplicates
@@ -230,8 +230,8 @@ with open('hassongs.csv', 'w', newline='') as csvfile:
 friendsdata = [['userid1', 'userid2']]
 
 for i in range(5000):
-    user1 = str(random.randrange(0, 1250)).zfill(8)                                                         # Select first user
-    user2 = str(random.randrange(0, 1250)).zfill(8)                                                         # Select second user
+    user1 = random.randrange(0, 1250)                                                                       # Select first user
+    user2 = random.randrange(0, 1250)                                                                       # Select second user
 
     if ([user1, user2] not in friendsdata and [user2, user1] not in friendsdata and user1 != user2):        # Check for duplicates and self friending
         friendsdata.append([user1, user2])
@@ -251,7 +251,7 @@ with open('friends.csv', 'w', newline='') as csvfile:
 createdata = [['postid', 'tagid']]
 
 for i in range(len(postdata) - 1):                                                                          # Loop through posts
-    post = str(i).zfill(8)                                                                                  # Select post by ID
+    post = i                                                                                                # Select post by ID
     tag = tags[random.randrange(0, len(tags))]                                                              # Select random tag
 
     createdata.append([post, tag])
