@@ -1,10 +1,9 @@
 
 -- Select 10 most popular songs of each genre
-SELECT DISTINCT songid, songname, artistname, listens
+SELECT DISTINCT songid, songname, artistname, Artists.genre
 FROM Songs NATURAL JOIN HasSongs NATURAL JOIN Artists
+GROUP BY Artists.genre, songid, songname, artistname
 LIMIT 10
-GROUP BY genre
-ORDER BY listens DESC
 
 -- Select 3 most popular songs of each artist
 SELECT DISTINCT songid, songname, artistname, listens
