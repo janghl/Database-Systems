@@ -1,31 +1,34 @@
 
 -- Select 10 most popular songs of each genre
-SELECT DISTINCT songid, songname, artistname, Artists.genre
+SELECT DISTINCT songid, songname, Artists.genre
 FROM Songs NATURAL JOIN HasSongs NATURAL JOIN Artists
-GROUP BY Artists.genre, songid, songname, artistname
-LIMIT 10
+GROUP BY Artists.genre, songid, songname
+HAVING genre LIKE '%Hip Hop%'
+ORDER BY Artists.genre
+LIMIT 15;
 
--- Select 3 most popular songs of each artist
-SELECT DISTINCT songid, songname, artistname, listens
-FROM Songs NATURAL JOIN HasSongs NATURAL JOIN Artists
-LIMIT 3
-GROUP BY artistid
+-- Select 3 most popular songs
+SELECT DISTINCT Songs.songid, songname, artistid, artistname, COUNT(ListeningHistories.songid) AS listens
+FROM (SELECT DISTINCT songname FROM Songs) AS SongNames NATURAL JOIN Songs NATURAL JOIN HasSongs NATURAL JOIN Artists NATURAL JOIN ListeningHistories
+GROUP BY songname, songid, artistname, artistid
 ORDER BY listens DESC
+LIMIT 15;
 
 -- Select songs with the best rating
 SELECT DISTINCT songid, songname, AVG(rating) as AverageRating
-FROM Posts NATURAL JOIN Songs
-GROUP BY genre
+FROM Posts NATURAL JOIN Songs NATURAL JOIN Artists
+GROUP BY genre, songid
 ORDER BY AVG(rating) DESC
+LIMIT 15;
 
 -- Select most popular artists among friends
-SELECT DISTINCT artistid, COUNT(*) as ArtistCount
-FROM UserAccounts NATURAL JOIN ListeningHistory NATURAL JOIN Songs
+SELECT DISTINCT artistid, artistname, COUNT(*) as ArtistCount
+FROM UserAccounts NATURAL JOIN ListeningHistories NATURAL JOIN Songs
      NATURAL JOIN HasSongs NATURAL JOIN Artists
 WHERE UserAccounts.userid IN (SELECT userid2
-                              FROM FRIENDS
+                              FROM Friends
                               WHERE userid1 = UserAccounts.userid)
-LIMIT 15
 GROUP BY artistid
 ORDER BY ArtistCount DESC
+LIMIT 15;
 
