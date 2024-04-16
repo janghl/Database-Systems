@@ -64,65 +64,106 @@
 }
 
 .side-panel {
-    width: 15%;
-    height: 200vh; /* Use viewport height to stretch the panel */
-    background-color: #000000; /* Adjust background color as needed */
-    top: 0;
-    left: 0;
-    position: absolute;
-    align-items: center;
-  }
-  
-  .side-panel-content {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    margin-top: 80px;
-    align-items: center;
-    position: inherit;
-    height: calc(100% - 80px - 10px);
-    width: calc(100% - 5px - 5px);
-  }
+  width: 15%;
+  height: 200vh; /* Use viewport height to stretch the panel */
+  background-color: #000000; /* Adjust background color as needed */
+  top: 0;
+  left: 0;
+  position: absolute;
+  align-items: center;
+}
 
-  .panel-text {
-    color: white;
-    margin-top: 5px;
-  }
-  
-  .panel-image {
-    max-width: 100%;
-    max-height: 100%;
-    position: relative;
-  }
+.side-panel-content {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  margin-top: 80px;
+  align-items: center;
+  position: inherit;
+  height: calc(100% - 80px - 10px);
+  width: calc(100% - 5px - 5px);
+}
 
-  .panel-block a {
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text content horizontally */
-    display: flex;
-    margin-bottom: 75px;
-    flex-direction: column;
-    position: relative;
-    height: 300px;
-    width: 100%;
-  }
+.panel-text {
+  color: white;
+  margin-top: 5px;
+}
+
+.panel-image {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+.panel-block a {
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text content horizontally */
+  display: flex;
+  margin-bottom: 75px;
+  flex-direction: column;
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
 
   /* Post related values */
 
+.postContainer {
+    margin-top: 20px;
+    height: calc(100% - 20%);
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+    position: relative;
+} 
+
 .post {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid #1b4221;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 1000px;
+  height: 200px;
   padding: 20px;
   margin-bottom: 20px;
   background-color: rgb(45, 136, 86);
+  position: relative;
+}
+
+.post-album-img {
+  border: 2px solid rgba(15, 53, 21, 0.568);
+  margin-top: -158px;
+  margin-left: 0px;
+  height: 175px;
+  width: 175px;
+  display: block;
+  object-fit: cover;
+}
+
+.post-album-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .post h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+
+.post h1 {
+  font-size: 1.75rem;
+  margin-left: 200px;
   margin-bottom: 10px;
 }
 
 .post p {
   font-size: 1rem;
-  margin-bottom: 15px;
+  margin-left: 200px;
+  margin-bottom: 4px;
 }
 
