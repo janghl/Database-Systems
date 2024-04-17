@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Reviews from "./pages/Reviews";
+import Reviews from "./pages/Posts";
 import Artists from "./pages/Artists";
 import Music from "./pages/Music";
 import Friends from "./pages/Friends";

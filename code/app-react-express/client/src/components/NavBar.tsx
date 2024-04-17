@@ -5,7 +5,7 @@ function NavBar() {
     <div className="sticky-top">
       <nav className="navbar navbar-expand-lg navbar-custom">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <img
               src="https://i.ibb.co/0Qz82xX/monkeymusic.jpg"
               className="logo"
