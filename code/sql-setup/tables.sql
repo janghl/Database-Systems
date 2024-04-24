@@ -62,3 +62,7 @@ CREATE TABLE HasSongs (
   songid VARCHAR(22),
   PRIMARY KEY (artistid, songid)
 );
+
+CREATE TABLE ActiveUser (
+  userid INT,
+);

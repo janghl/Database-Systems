@@ -8,7 +8,7 @@ function Artists() {
   // Function to handle button click
   const handleClick = () => {
     // Make an HTTP GET request to the backend endpoint
-    fetch('http://localhost:8080/generate-artists') // Replace with your actual backend URL
+    fetch('http://localhost:8080/generate-artists') 
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

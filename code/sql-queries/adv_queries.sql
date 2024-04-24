@@ -32,3 +32,11 @@ GROUP BY artistid
 ORDER BY ArtistCount DESC
 LIMIT 15;
 
+
+ALTER TABLE Artists ADD COLUMN numreferences INT DEFAULT 0;
+CREATE TABLE Logins (
+  userid INT,
+  logintimes INT,
+);
+
+ALTER TABLE Logins ADD CONSTRAINT FK_userid_L FOREIGN KEY (userid) REFERENCES UserAccounts(userid) ON DELETE CASCADE;
