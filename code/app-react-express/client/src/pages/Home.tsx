@@ -8,9 +8,7 @@ function Home() {
     <div className="screen">
       <NavBar />
       <Title />
-      <div className="bodyContainer">
-        <BgImage />
-      </div>
+      <BgImage />
     </div>
   );
 }

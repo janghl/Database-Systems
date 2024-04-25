@@ -31,7 +31,7 @@ function Artists() {
       <NavBar />
       <div className="bodyContainer">
         Hello there! Currently working on Artists page, try again later!
-        <Button clickFunction={handleClick} text={"Generate Artists"} />
+        <Button clickFunction={handleClick} text={"Generate Artists"}/>
         {stringdata && 
           <p>
             ${stringdata}

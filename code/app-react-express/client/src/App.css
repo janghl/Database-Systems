@@ -1,11 +1,11 @@
 /* Include: border: 2px solid white; to see position on screen*/
 .titleText {
-    color: black; /* black color*/
+    color: rgb(255, 255, 255); /* black color*/
     font-family: 'Helvetica', sans-serif; /* Specify a clean sans-serif font */
     font-size: 60px; /* Adjust the font size as needed */
     font-weight: bold; /* Make the text bold for emphasis */
     padding: 10px 20px; /* Add padding for spacing, 10px top and bottom, 20px left and right */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow with offset, blur radius, and color */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); /* Shadow with offset, blur radius, and color */
     margin-left: 5px;
     margin-right: 5px;
     padding-top: 100px;
@@ -19,11 +19,13 @@
     font-weight: bold; /* Make the text bold for emphasis */
 }
 
-/* Include: border: 2px solid blue; to see position on screen*/
+/* Include: border: 2px solid blue; to see position on screen */
+/* NO SCROLLING, USE OTHER CONTAINERS TO DO SO (THIS ELIMINATES A BUG) */
 .screen {
-    background-color: rgb(81, 198, 133);
-    height: 200vh;
+    background-color: rgb(31, 31, 31);
+    height: 100vh;
     width: 100%;
+    overflow-y: auto;
 }
 
 /* Include: border: 2px solid black; to see position on screen*/
@@ -33,6 +35,7 @@
     margin-right: 5px;
     justify-content: center;
     position: relative;
+    color: white
 }
 
 /* Change the color of the navbar text*/
@@ -63,10 +66,32 @@
    margin-right: auto;
 }
 
+.side-panel-content::-webkit-scrollbar {
+  width: 8px;
+  margin-left: 5px;
+}
+
+.side-panel-content::-webkit-scrollbar-thumb {
+  background-color: #333; 
+  border-radius: 10px;
+}
+
+.side-panel-content::-webkit-scrollbar-track:hover {
+  background-color: #44444421; 
+}
+
+.side-panel-content::-webkit-scrollbar-thumb:hover {
+  background-color: #3f3f3f; 
+}
+
+.side-panel-content::-webkit-scrollbar-corner {
+  background-color: transparent; 
+}
+
 .side-panel {
   width: 15%;
-  height: 200vh; /* Use viewport height to stretch the panel */
-  background-color: #000000; /* Adjust background color as needed */
+  height: 100vh; 
+  background-color: #000000; 
   top: 0;
   left: 0;
   position: absolute;
@@ -84,6 +109,25 @@
   width: calc(100% - 5px - 5px);
 }
 
+.close-btn {
+  background-color: #333;
+  position: absolute;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: 90px;
+  right: -40px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-btn:hover {
+  background-color: #555;
+}
+
 .panel-text {
   color: white;
   margin-top: 5px;
@@ -96,8 +140,8 @@
 }
 
 .panel-block a {
-  align-items: center; /* Center content horizontally */
-  text-align: center; /* Center text content horizontally */
+  align-items: center; 
+  text-align: center; 
   display: flex;
   margin-bottom: 75px;
   flex-direction: column;
@@ -118,7 +162,7 @@
 } 
 
 .post {
-  border: 2px solid #1b4221;
+  border: 3px solid #13294B;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
@@ -127,16 +171,16 @@
   height: 200px;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: rgb(45, 136, 86);
+  background-color: rgb(24, 24, 24);
   position: relative;
 }
 
 .post-album-img {
-  border: 2px solid rgba(15, 53, 21, 0.568);
-  margin-top: -158px;
+  border: 2px solid #E84A27;
+  margin-top: -150px;
   margin-left: 0px;
-  height: 175px;
-  width: 175px;
+  height: 160px;
+  width: 160px;
   display: block;
   object-fit: cover;
 }
@@ -149,21 +193,59 @@
 
 .post h2 {
   font-size: 2rem;
-  margin-left: 200px;
+  margin-left: 180px;
   margin-bottom: 10px;
   font-weight: bold;
-  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 4px #ffffff5d;
+  color: rgb(218, 218, 218);
 }
 
 .post h1 {
   font-size: 1.75rem;
-  margin-left: 200px;
+  margin-left: 190px;
   margin-bottom: 10px;
+  color: white
 }
 
 .post p {
   font-size: 1rem;
-  margin-left: 200px;
+  margin-left: 190px;
   margin-bottom: 4px;
+  color: rgb(218, 218, 218);
 }
 
+.login-form {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px; 
+  margin: 0 auto; 
+}
+
+.login-heading {
+  margin-bottom: 20px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1b4221;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: rgb(45, 136, 86);
+}

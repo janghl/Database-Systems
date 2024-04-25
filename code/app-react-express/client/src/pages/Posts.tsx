@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import "../App.css";
 import Post from "../components/Post";
 
-function Reviews() {
+function Posts() {
   return (
     <div className="screen">
       <NavBar />
@@ -13,4 +13,4 @@ function Reviews() {
   );
 }
 
-export default Reviews;
+export default Posts;

@@ -1,24 +1,28 @@
-import "../App.css";
+import React, { useState } from "react";
+import SidePanel from "./SidePanel";
 
 function NavBar() {
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+  const toggleSidePanel = () => {
+    setIsSidePanelOpen(!isSidePanelOpen);
+  };
+
   return (
     <div className="sticky-top">
       <nav className="navbar navbar-expand-lg navbar-custom">
         <div className="container">
           <a className="navbar-brand" href="/">
             <img
-              src="https://i.ibb.co/0Qz82xX/monkeymusic.jpg"
+              src="https://i.imgur.com/EswKOEZ.png"
               className="logo"
+              alt="Logo"
             />
           </a>
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+            onClick={toggleSidePanel}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -40,8 +44,8 @@ function NavBar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="reviews">
-                  Reviews
+                <a className="nav-link" href="posts">
+                  Posts
                 </a>
               </li>
               <li className="nav-item">
@@ -50,14 +54,20 @@ function NavBar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="about">
+                <button className="nav-link" onClick={toggleSidePanel}>
                   About
+                </button>
+              </li>
+              <li className="nav-item" style={{ marginLeft: "650px" }}>
+                <a className="nav-link" href="login">
+                  Login
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      {isSidePanelOpen && <SidePanel onClose={toggleSidePanel} />}
     </div>
   );
 }
