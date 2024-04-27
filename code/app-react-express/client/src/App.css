@@ -21,7 +21,7 @@
 
 /* Include: border: 2px solid blue; to see position on screen */
 /* NO SCROLLING, USE OTHER CONTAINERS TO DO SO (THIS ELIMINATES A BUG) */
-.screen {
+.screen {height: calc(100% - 15%);
     background-color: rgb(31, 31, 31);
     height: 100vh;
     width: 100%;
@@ -154,7 +154,7 @@
 
 .postContainer {
     margin-top: 0px;
-    height: calc(100% - 15%);
+    
     margin-left: 5px;
     margin-right: 5px;
     justify-content: center;
@@ -227,7 +227,7 @@
 .post img {
   height: auto; 
   width: 30%;
-  margin-top: -140px;
+  margin-top: -190px;
   position: relative;
   margin-left: 650px;
 }
@@ -244,6 +244,26 @@
   margin-top: 10px;
   background-color: rgb(24, 24, 24);
   position: relative;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.button-container button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #353535;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #4e4e4e;
 }
 
 .artistentry h2 {

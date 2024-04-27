@@ -32,6 +32,10 @@ function Post({ SongName, UserName, Artist, TimeOfPost, Rating }: PostProps) {
       <h1>{SongName} by {Artist}</h1>
       <p>{TimeOfPost}</p>
       <img src={getImageUrl()} alt={`Rating ${Rating}`} />
+      <div className="button-container" style = {{marginLeft: '800px', marginTop: '-30px'}}>
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
     </div>
   );
 }
