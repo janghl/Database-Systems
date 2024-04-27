@@ -154,7 +154,7 @@
 
 .postContainer {
     margin-top: 0px;
-    height: calc(100% - 10%);
+    height: calc(100% - 15%);
     margin-left: 5px;
     margin-right: 5px;
     justify-content: center;
@@ -187,12 +187,12 @@
 .post {
   border: 2px solid #6b6b6b;
   margin-left: auto;
-  margin-right: 200px;
+  margin-right: auto;
   border-radius: 10px;
   width: 1000px;
   height: 150px;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
   background-color: rgb(24, 24, 24);
   position: relative;
@@ -232,6 +232,40 @@
   margin-left: 650px;
 }
 
+.artistentry {
+  border: 2px solid #6b6b6b;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 1000px;
+  height: 80px;
+  padding: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: rgb(24, 24, 24);
+  position: relative;
+}
+
+.artistentry h2 {
+  font-size: 1.75rem;
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px #ffffff5d;
+  color: rgb(218, 218, 218);
+}
+
+.artistentry h1 {
+  font-size: 1.5rem;
+  margin-top: -40px;
+  margin-bottom: 10px;
+  position: relative;
+  margin-left: 600px;
+  font-weight: 100;
+  color: white
+}
+
 .login-form {
   background-color: #ffffff;
   border: 1px solid #cccccc;
@@ -266,4 +300,34 @@
 
 .login-form button:hover {
   background-color: #f35b38;
+}
+
+.button {
+  border: 2px solid #6b6b6b;
+  border-radius: 10px;
+  margin-right: 2px;
+  margin-left: 2px;
+  padding: 10px 20px;
+  background-color: rgb(24, 24, 24);
+  color: rgb(218, 218, 218);
+  font-size: 1rem;
+  font-weight: 500;
+  width: 300px;
+  text-shadow: 2px 2px 4px #ffffff5d;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #6b6b6b;
+  color: white;
+}
+
+.buttoncontainer {
+  margin-top: 0px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-y: auto;
 }
