@@ -1,0 +1,169 @@
+/* Include: border: 2px solid white; to see position on screen*/
+.titleText {
+    color: black; /* black color*/
+    font-family: 'Helvetica', sans-serif; /* Specify a clean sans-serif font */
+    font-size: 60px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold for emphasis */
+    padding: 10px 20px; /* Add padding for spacing, 10px top and bottom, 20px left and right */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow with offset, blur radius, and color */
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 100px;
+    text-align: center;
+}
+
+/* Include: border: 2px solid grey; to see position on screen*/
+.subtitleText {
+    font-family: 'Helvetica', sans-serif; /* Specify a clean sans-serif font */
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold for emphasis */
+}
+
+/* Include: border: 2px solid blue; to see position on screen*/
+.screen {
+    background-color: rgb(81, 198, 133);
+    height: 200vh;
+    width: 100%;
+}
+
+/* Include: border: 2px solid black; to see position on screen*/
+.bodyContainer {
+    height: calc(100% - 20%);
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+    position: relative;
+}
+
+/* Change the color of the navbar text*/
+.navbar-custom .navbar-nav .nav-link {
+    font-size: 20px;
+    color: #e8ecf4;
+    height: 40px;
+}
+
+/* Lighter text color on hover */
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #cccccc; 
+  }
+
+.navbar-custom {
+    background-color: rgb(0, 0, 0);
+}
+
+.logo {
+    height: 50px;
+    display: inline-block;
+}
+
+.bgimage {
+   width: 500px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.side-panel {
+  width: 15%;
+  height: 200vh; /* Use viewport height to stretch the panel */
+  background-color: #000000; /* Adjust background color as needed */
+  top: 0;
+  left: 0;
+  position: absolute;
+  align-items: center;
+}
+
+.side-panel-content {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  margin-top: 80px;
+  align-items: center;
+  position: inherit;
+  height: calc(100% - 80px - 10px);
+  width: calc(100% - 5px - 5px);
+}
+
+.panel-text {
+  color: white;
+  margin-top: 5px;
+}
+
+.panel-image {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+.panel-block a {
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text content horizontally */
+  display: flex;
+  margin-bottom: 75px;
+  flex-direction: column;
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+  /* Post related values */
+
+.postContainer {
+    margin-top: 20px;
+    height: calc(100% - 20%);
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+    position: relative;
+} 
+
+.post {
+  border: 2px solid #1b4221;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 1000px;
+  height: 200px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(45, 136, 86);
+  position: relative;
+}
+
+.post-album-img {
+  border: 2px solid rgba(15, 53, 21, 0.568);
+  margin-top: -158px;
+  margin-left: 0px;
+  height: 175px;
+  width: 175px;
+  display: block;
+  object-fit: cover;
+}
+
+.post-album-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.post h2 {
+  font-size: 2rem;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+
+.post h1 {
+  font-size: 1.75rem;
+  margin-left: 200px;
+  margin-bottom: 10px;
+}
+
+.post p {
+  font-size: 1rem;
+  margin-left: 200px;
+  margin-bottom: 4px;
+}
+
