@@ -7,7 +7,7 @@ const cors = require('cors'); // Import the cors middleware
 var connection = mysql.createConnection({
   host: '34.170.173.137', 
   user: 'root',
-  password: 'spotify-harmonics',
+  password: 'root',
   database: 'ihd'
 });
 
@@ -21,7 +21,7 @@ app.get('/', (req,res) => res.send('Try: /status, /artistdata') );
 app.get('/status', (req, res) => res.send('Success.') );
 
 
-// GET all artist data
+// GET all artist data for initial display
 app.get('/artists', (req, res) => {
   connection.query("SELECT artistname, genre FROM `ihd`.`Artists`", (err, results) => {
     if (err) {
@@ -32,6 +32,19 @@ app.get('/artists', (req, res) => {
     res.json(results);
   });
 });
+
+// GET all post data for initial display
+app.get('/posts', (req, res) => {
+  connection.query("SELECT * FROM `ihd`.`Posts`", (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 
 // New endpoint to trigger the artists query
 app.get('/generate-artists', (req, res) => {

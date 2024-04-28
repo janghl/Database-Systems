@@ -37,7 +37,6 @@ import Artist from "../components/ArtistEntry";
 interface ArtistData {
   artistname: string;
   genre: string;
-  // Add more properties if needed
 }
 
 interface ArtistsProps {
