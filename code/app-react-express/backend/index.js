@@ -35,20 +35,7 @@ app.get('/artists', (req, res) => {
 
 // GET all post data for initial display
 app.get('/posts', (req, res) => {
-  connection.query("SELECT * FROM `ihd`.`Posts`", (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    res.json(results);
-  });
-});
-
-
-// New endpoint to trigger the artists query
-app.get('/generate-artists', (req, res) => {
-  connection.query("SELECT artistname FROM `ihd`.`Artists` LIMIT 15", (err, results) => {
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` LIMIT 30", (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Internal Server Error');

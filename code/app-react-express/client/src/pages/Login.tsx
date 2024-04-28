@@ -60,7 +60,7 @@ function Login() {
     console.log("Username:", username);
     console.log("Password:", password);
 
-    fetch("/login", {
+    fetch("http://localhost:8080/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
