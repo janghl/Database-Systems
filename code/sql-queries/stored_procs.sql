@@ -4,6 +4,8 @@ BEGIN
     DECLARE cur_id INT DEFAULT NULL;
     DECLARE found_password VARCHAR(255);
 
+    DECLARE next_userid INT DEFAULT NULL;
+
     START TRANSACTION;
     SET TRANSACTION READ WRITE;
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
@@ -29,6 +31,10 @@ BEGIN
             END IF;
         END IF; -- Wrong password
 
+    END IF;
+    ELSE 
+        next_userid = SELECT Count(*) FROM UserAccounts;
+        INSERT INTO UserAccounts (userid, username, passwd) VALUES (next_userid + 1, u_username, u_password);
     END IF;
 
     -- Commit the transaction
@@ -59,3 +65,4 @@ BEGIN
 END;
 //
 DELIMITER ;
+

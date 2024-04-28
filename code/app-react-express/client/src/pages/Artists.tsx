@@ -4,35 +4,66 @@ import Artist from "../components/ArtistEntry";
 // import Button from "../components/LoginButton";
 // import { useState } from "react";
 
-function Artists() {
+// function Artists() {
+//   return (
+//     <div className="screen">
+//       <NavBar />
+//       <div className="postContainer" style={{height: 'calc(100% - 10%)'}}>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//         <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+//       </div>
+//     </div>
+
+//   )
+
+interface ArtistData {
+  artistname: string;
+  genre: string;
+  // Add more properties if needed
+}
+
+interface ArtistsProps {
+  artists: ArtistData[];
+}
+
+function Artists({ artists }: ArtistsProps) {
   return (
     <div className="screen">
       <NavBar />
-      <div className="postContainer" style={{height: 'calc(100% - 10%)'}}>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
-        <Artist ArtistName = "Artist Name Here" Genre = "Genre"/>
+      <div className="postContainer" style={{ height: 'calc(100% - 10%)' }}>
+        {artists.map((artist, index) => (
+          <Artist
+            key={index}
+            ArtistName={artist.artistname}
+            Genre={artist.genre}
+          />
+        ))}
       </div>
     </div>
+  );
+}
 
-  )
+export default Artists;
+
+
 //   const [stringdata, setStringdata] = useState("");
 //   // Function to handle button click
 //   const handleClick = () => {
@@ -68,6 +99,6 @@ function Artists() {
 //       </div>
 //     </div>
 //   );
- }
+//  }
 
-export default Artists;
+// export default Artists;

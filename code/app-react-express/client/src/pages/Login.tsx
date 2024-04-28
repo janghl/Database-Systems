@@ -59,7 +59,16 @@ function Login() {
     // Pass username and password to SQL query function or API endpoint
     console.log("Username:", username);
     console.log("Password:", password);
-    // Call SQL query function or API endpoint here
+
+    fetch("/login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(['username', 'password'])
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
   };
 
   return (
