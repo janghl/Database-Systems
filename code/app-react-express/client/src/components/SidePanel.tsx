@@ -6,11 +6,14 @@ interface SidePanelProps {
 
 const SidePanel: React.FC<SidePanelProps> = ({ onClose }) => {
   return (
-    <div className="side-panel" >
+    <div className="side-panel">
       <button className="close-btn" onClick={onClose}>
         X
       </button>
-      <div className="side-panel-content" style={{ height: "800px", overflowY: "auto" }}>
+      <div
+        className="side-panel-content"
+        style={{ height: "800px", overflowY: "auto" }}
+      >
         <div className="panel-block">
           <div>
             <p className="panel-text">Michael Rheintgen</p>
@@ -43,7 +46,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ onClose }) => {
         </div>
         <div className="panel-block">
           <div>
-            <p className="panel-text">Joe</p>
+            <p className="panel-text">Hanliang Jiang</p>
             <img
               src="https://i.ibb.co/BVyr2yw/joepic.jpg"
               alt="Joe"
