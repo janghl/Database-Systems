@@ -26,7 +26,6 @@
     height: 100vh;
     width: 100%;
     overflow-y: auto;
-    border: 2px solid blue;
 }
 
 /* Include: border: 2px solid black; to see position on screen*/
