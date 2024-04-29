@@ -40,3 +40,15 @@ CREATE TABLE Logins (
 );
 
 ALTER TABLE Logins ADD CONSTRAINT FK_userid_L FOREIGN KEY (userid) REFERENCES UserAccounts(userid) ON DELETE CASCADE;
+
+
+
+SELECT DISTINCT u.username
+     FROM UserAccounts u
+     JOIN Friends f ON u.userid = f.userid2
+     WHERE f.userid1 IN (SELECT userid FROM UserAccounts WHERE username = 'ber9594' AND userid IN ActiveUser)
+     UNION
+     SELECT u2.username
+     FROM UserAccounts u2
+     JOIN Friends f2 ON u2.userid = f2.userid1
+     WHERE f2.userid2 IN (SELECT userid FROM UserAccounts WHERE username = 'ber9594' AND userid IN ActiveUser)

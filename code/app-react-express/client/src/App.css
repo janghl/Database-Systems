@@ -248,22 +248,66 @@
 }
 
 .artistentry h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
   margin-top: 0px;
   margin-left: 10px;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 700;
   text-shadow: 2px 2px 4px #ffffff5d;
   color: rgb(218, 218, 218);
 }
 
 .artistentry h1 {
+  font-size: 1.75rem;
+  margin-top: -40px;
+  margin-bottom: 10px;
+  position: relative;
+  margin-left: 600px;
+  font-weight: 500;
+  color: white
+}
+
+.musicentry {
+  border: 4px solid #6b6b6b;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 1000px;
+  height: 80px;
+  padding: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: rgb(24, 24, 24);
+  position: relative;
+}
+
+.musicentry h2 {
+  font-size: 2rem;
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px #ffffff5d;
+  color: rgb(218, 218, 218);
+}
+
+.musicentry h1 {
   font-size: 1.5rem;
   margin-top: -40px;
   margin-bottom: 10px;
   position: relative;
   margin-left: 600px;
-  font-weight: 100;
+  font-weight: 500;
+  color: white
+}
+
+.musicentry h3 {
+  font-size: 1.5rem;
+  margin-top: -40px;
+  margin-bottom: 10px;
+  position: relative;
+  margin-left: 800px;
+  font-weight: 500;
   color: white
 }
 

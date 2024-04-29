@@ -15,6 +15,8 @@ function App() {
   // States to store data
   const [artists, setArtists] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [music, setMusic] = useState([]);
 
   // Function to fetch artists data from backend
   const fetchArtistsData = async () => {
@@ -46,10 +48,40 @@ function App() {
     }
   };
 
+   const fetchFriendsData = async () => {
+    console.log("trying to get friends data");
+    try {
+      const response = await fetch("http://localhost:8080/friends");
+      if (!response.ok) {
+        throw new Error("Failed to fetch friends data");
+      }
+      const data = await response.json();
+      setFriends(data);
+    } catch (error) {
+      console.error("Error fetching friends data:", error);
+    }
+  };
+
+  const fetchMusicData = async () => {
+    console.log("trying to get music data");
+    try {
+      const response = await fetch("http://localhost:8080/music");
+      if (!response.ok) {
+        throw new Error("Failed to fetch music data");
+      }
+      const data = await response.json();
+      setMusic(data);
+    } catch (error) {
+      console.error("Error fetching music data:", error);
+    }
+  };
+
   // Fetch artists data when component mounts
   useEffect(() => {
     fetchArtistsData();
     fetchPostsData();
+    fetchFriendsData();
+    fetchMusicData();
   }, []);
 
   return (
@@ -60,8 +92,10 @@ function App() {
         {/* Pass post data as props to Posts component */}
         <Route path="/artists" element={<Artists artists={artists} />} />{" "}
         {/* Pass artists data as props to Artists component */}
-        <Route path="/friends" element={<Friends />} />
-        <Route path="/music" element={<Music />} />
+        <Route path="/friends" element={<Friends friends={friends} />} />{" "}
+        {/* Pass friends data as props */}
+        <Route path="/music" element={<Music music={music}/>} />{" "}
+        {/* Pass music data as props */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
@@ -72,18 +106,3 @@ function App() {
 
 export default App;
 
-// function App() {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<Home />} />
-//       <Route path="/posts" element={<Posts />} />
-//       <Route path="/artists" element={<Artists />} />
-//       <Route path="/friends" element={<Friends />} />
-//       <Route path="/music" element={<Music />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/signup" element={<Signup />} />
-//     </Routes>
-//   );
-// }
-
-// export default App;

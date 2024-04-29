@@ -78,7 +78,34 @@ END;
 DELIMITER ;
 
 
--- Need to make one to update useraccounts table and to add a new username, userid, and passwd (use table len to determine new userid)
+DELIMITER //
+CREATE PROCEDURE ShowFriends( IN username VARCHAR(255), OUT success INT )
+BEGIN
+
+    DECLARE cur_id INT DEFAULT NULL;
+
+    SET TRANSACTION READ WRITE;
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    START TRANSACTION;
+
+    SET cur_id = (SELECT userid FROM UserAccounts WHERE UserAccounts.username = username);
+
+    IF cur_id NOT IN (SELECT * FROM ActiveUser) THEN
+        SET success = 0;
+    ELSE 
+        SET success = 1;
+        SELECT username FROM UserAccounts u JOIN (SELECT fr.userid2 AS ud FROM UserAccounts JOIN Friends fr ON fr.userid1 = cur_id ) f ON u.userid=f.ud
+        UNION
+        SELECT username FROM UserAccounts u2 JOIN (SELECT fr.userid1 AS ud FROM UserAccounts JOIN Friends fr ON fr.userid2 = cur_id ) f2 ON u2.userid=f2.ud;
+
+    COMMIT;
+    END IF;
+
+END
+//
+DELIMITER ;
+
+
 
 DELIMITER //
 CREATE PROCEDURE Logout( IN username VARCHAR(255) )
@@ -98,5 +125,64 @@ BEGIN
 
 END;
 //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE AddFriend( IN u_username VARCHAR(255), OUT success INT )
+BEGIN
+    DECLARE cur_user_id INT;
+    DECLARE friend_user_id INT;
+
+    SET TRANSACTION READ WRITE;
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    START TRANSACTION;
+
+    SELECT DISTINCT userid FROM ActiveUser INTO cur_user_id;
+    SELECT DISTINCT userid FROM UserAccounts WHERE username = u_username INTO friend_user_id;
+
+    IF EXISTS (SELECT DISTINCT userid FROM UserAccounts WHERE username = u_username) THEN
+        SET success = 1;
+        INSERT INTO Friends (userid1, userid2) VALUES (cur_user_id, friend_user_id);
+    ELSE
+        SET success = 0;
+    END IF;
+
+    COMMIT;   
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE RemoveFriend( IN u_username VARCHAR(255), OUT success INT )
+BEGIN
+    DECLARE cur_user_id INT;
+    DECLARE friend_user_id INT;
+
+    SET TRANSACTION READ WRITE;
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    START TRANSACTION;
+
+    SELECT userid FROM ActiveUser INTO cur_user_id;
+    SELECT userid FROM UserAccounts WHERE username = u_username INTO friend_user_id;
+
+    IF EXISTS (
+        SELECT * FROM (
+            SELECT userid1 AS user_id FROM Friends WHERE userid2 = cur_user_id
+            UNION
+            SELECT userid2 AS user_id FROM Friends WHERE userid1 = cur_user_id
+        ) AS temp
+        WHERE user_id = friend_user_id
+    ) THEN
+        DELETE FROM Friends WHERE (userid1 = cur_user_id AND userid2 = friend_user_id) OR (userid1 = friend_user_id AND userid2 = cur_user_id);
+        SET success = 1;
+    ELSE
+        SET success = 0;
+    END IF;
+
+    COMMIT;   
+END;
+//
+
 DELIMITER ;
 
