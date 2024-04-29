@@ -194,21 +194,22 @@ BEGIN
     DECLARE next_post_id INT DEFAULT NULL;
     DECLARE cur_user_id INT;
     DECLARE cur_timeofpost VARCHAR(255);
-    DECLARE cur_song_id INT;
+    DECLARE cur_song_id VARCHAR(22);
 
     SET TRANSACTION READ WRITE;
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
     START TRANSACTION;
 
     SELECT userid INTO cur_user_id FROM ActiveUser ORDER BY userid LIMIT 1;
-    SELECT songid INTO cur_song_id FROM Songs WHERE songname LIKE '%u_songname%' ORDER BY songid LIMIT 1;
+    select u_songname;
+    SELECT songid INTO cur_song_id FROM Songs WHERE songname = u_songname ORDER BY songid LIMIT 1;
+    select cur_song_id;
     SELECT COUNT(*) INTO next_post_id FROM Posts;
     SET next_post_id = next_post_id + 1;
 
-    -- SELECT NOW() INTO cur_timeofpost;
+    SELECT NOW() INTO cur_timeofpost;
     
-    INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, 1, 0, cur_user_id, cur_song_id);
-    -- INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, cur_timeofpost, 0, cur_user_id, cur_song_id);
+    INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, cur_timeofpost, 0, cur_user_id, cur_song_id);
     SET success = 1;
 
     COMMIT;   
