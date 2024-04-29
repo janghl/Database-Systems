@@ -1,25 +1,29 @@
 DELIMITER //
-CREATE PROCEDURE CheckLogins( IN u_username VARCHAR(255), IN u_password VARCHAR(255))
+CREATE PROCEDURE CheckLogins(
+    IN u_username VARCHAR(255),
+    IN u_password VARCHAR(255),
+    OUT success INT
+)
 BEGIN
     DECLARE cur_id INT DEFAULT NULL;
     DECLARE found_password VARCHAR(255);
 
-    DECLARE next_userid INT DEFAULT NULL;
-
-    START TRANSACTION;
     SET TRANSACTION READ WRITE;
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    START TRANSACTION;
+
+    -- INSERT INTO Logins (userid, logintimes) VALUES (1, 500);
 
     -- Get the userid based on the username
     SET cur_id = (SELECT userid FROM UserAccounts WHERE UserAccounts.username = u_username);
 
-    -- Get their passwd based on userid
+    -- Get their password based on userid
     SET found_password = (SELECT passwd FROM UserAccounts WHERE UserAccounts.userid = cur_id);
 
     -- Check if cur_id is not null
     IF cur_id IS NOT NULL THEN
         -- Check if password is correct
-        IF found_password = u_password THEN
+        IF found_password LIKE CONCAT('%', u_password, '%') THEN
             -- Check if the userid exists in Logins
             IF NOT EXISTS (SELECT * FROM Logins WHERE userid = cur_id) THEN
                 -- Insert a new record into Logins
@@ -29,13 +33,43 @@ BEGIN
                 -- Update the logintimes for the existing record
                 UPDATE Logins SET logintimes = logintimes + 1 WHERE userid = cur_id;
             END IF;
-        END IF; -- Wrong password
+            -- Account found
+            SET success = 1;
+        ELSE
+            -- Wrong password
+            SET success = 0;
+        END IF;
+    ELSE
+        -- Account not found
+        SET success = -1;
+    END IF;
 
-    END IF;
-    ELSE 
-        next_userid = SELECT Count(*) FROM UserAccounts;
-        INSERT INTO UserAccounts (userid, username, passwd) VALUES (next_userid + 1, u_username, u_password);
-    END IF;
+    -- Commit the transaction
+    COMMIT;
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CheckSignups(
+    IN u_username VARCHAR(255),
+    IN u_password VARCHAR(255),
+    OUT success INT
+)
+BEGIN
+    DECLARE next_userid INT DEFAULT NULL;
+
+    SET TRANSACTION READ WRITE;
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    START TRANSACTION;
+    SELECT COUNT(*) INTO next_userid FROM UserAccounts;
+    SET next_userid = next_userid + 1;
+
+    INSERT INTO UserAccounts (userid, username, passwd) VALUES (next_userid, u_username, u_password);
+    INSERT INTO Logins (userid, logintimes) VALUES (next_userid, 1);
+    INSERT INTO ActiveUser (userid) VALUES (next_userid);
+
+    SET success = 1;
 
     -- Commit the transaction
     COMMIT;

@@ -63,19 +63,26 @@ function Login() {
     console.log("Password:", password);
   
     try {
-      const response = await fetch("http://localhost:8080/posts?tmp_username=" + username + "&tmp_pswrd=" + password);
+      const response = await fetch("http://localhost:8080/login?tmp_username=" + username + "&tmp_pswrd=" + password);
       if (!response.ok) {
         throw new Error("Failed to login");
       }
       const data = await response.json();
-      console.log("Login success:", data);
-      setLoginSuccess(true); 
+      
+      // Check the login status returned from the server
+      if (data === 'Login success') {
+        setLoginSuccess(true);
+        setLoginFailed(false);
+      } else {
+        setLoginFailed(true);
+        setLoginSuccess(false);
+      }
     } catch (error) {
       console.error("Error logging in:", error);
       setLoginFailed(true);
+      setLoginSuccess(false);
     }
-  };
-  
+  };  
 
   return (
     <div className="screen">
