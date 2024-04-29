@@ -41,8 +41,46 @@ function Posts() {
     }
   };
 
+  // Function to fetch posts data from backend
+  const filterPostsBySong = async (songName: string) => {
+    console.log("trying to filter post data by song");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/songsearch?songName=${encodeURIComponent(
+          songName
+        )}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to filter posts data by song");
+      }
+      const data = await response.json();
+      setPosts(data); // Update state with fetched artists data
+    } catch (error) {
+      console.error("Error filtering posts data by song:", error);
+    }
+  };
+
+  // Function to fetch posts data from backend
+  const filterPostsByRating = async (rating: string) => {
+    console.log("trying to filter post data by rating");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/ratingsearch?rating=${encodeURIComponent(
+          rating
+        )}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to filter posts data by rating");
+      }
+      const data = await response.json();
+      setPosts(data); // Update state with fetched artists data
+    } catch (error) {
+      console.error("Error filtering posts data by rating:", error);
+    }
+  };
+
   // Function to handle search based on artist name
-  const handleSearch = (artistName: string) => {
+  function handleSearchByArtist(artistName: string) {
     if (artistName.trim() === "") {
       // If search query is empty, fetch all posts
       fetchPostsData();
@@ -50,7 +88,29 @@ function Posts() {
       // Otherwise, fetch posts by artist
       filterPostsByArtist(artistName);
     }
-  };
+  }
+
+  // Function to handle search based on artist name
+  function handleSearchBySong(songName: string) {
+    if (songName.trim() === "") {
+      // If search query is empty, fetch all posts
+      fetchPostsData();
+    } else {
+      // Otherwise, fetch posts by artist
+      filterPostsBySong(songName);
+    }
+  }
+
+  // Function to handle search based on artist name
+  function handleSearchByRating(rating: string) {
+    if (rating.trim() === "") {
+      // If search query is empty, fetch all posts
+      fetchPostsData();
+    } else {
+      // Otherwise, fetch posts by artist
+      filterPostsByRating(rating);
+    }
+  }
 
   useEffect(() => {
     // Fetch all posts data when component mounts
@@ -62,11 +122,17 @@ function Posts() {
     <div className="screen">
       <NavBar />
       <div className="buttoncontainer">
-        <SearchBar onSearch={handleSearch} placeholder="By Artist" />
+        <SearchBar
+          onSearch={handleSearchByArtist}
+          placeholder="Filter By Artist"
+        />
         <div style={{ marginRight: "10px" }} />
-        <SearchBar onSearch={handleSearch} placeholder="By Rating" />
+        <SearchBar
+          onSearch={handleSearchByRating}
+          placeholder="Filter By Rating"
+        />
         <div style={{ marginRight: "10px" }} />
-        <SearchBar onSearch={handleSearch} placeholder="By Song" />
+        <SearchBar onSearch={handleSearchBySong} placeholder="Filter By Song" />
       </div>
       <div className="postContainer">
         {posts.map((post, index) => (
