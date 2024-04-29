@@ -221,7 +221,7 @@ app.get('/addfriend', (req, res) => {
   connection.query('CALL AddFriend(?, @success)', [tmp_username], (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).send('Internal Server Error1');
       return;
     }
 
@@ -229,12 +229,12 @@ app.get('/addfriend', (req, res) => {
     connection.query('SELECT @success', (err, results2) => {
       if (err) {
         console.error('Error retrieving output parameter:', err);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Internal Server Error2');
         return;
       }
 
       var success = results2[0]['@success'];
-      console.log(success);
+      console.log("Success = " + success);
       // Check the value of account_found and send appropriate response
       if (success === 1) {
         res.send(JSON.stringify('Add friend success'));
@@ -249,6 +249,8 @@ app.get('/removefriend', (req, res) => {
 
   const { tmp_username } = req.query;
 
+  console.log(tmp_username);
+
   // Check if the required parameters are provided
   if (!tmp_username) {
     res.status(400).send('Username or password is missing');
@@ -257,6 +259,7 @@ app.get('/removefriend', (req, res) => {
 
   connection.query('CALL RemoveFriend(?, @success)', [tmp_username], (err, results) => {
     if (err) {
+      console.log('1');
       console.error('Error executing query:', err);
       res.status(500).send('Internal Server Error');
       return;
@@ -274,9 +277,9 @@ app.get('/removefriend', (req, res) => {
 
       // Check the value of account_found and send appropriate response
       if (success === 1) {
-        res.send(JSON.stringify('Add friend success'));
+        res.send(JSON.stringify('Remove friend success'));
       } else {
-        res.send(JSON.stringify('Add friend failed'));
+        res.send(JSON.stringify('Remove friend failed'));
       }
     });
   });

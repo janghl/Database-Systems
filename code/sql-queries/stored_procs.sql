@@ -138,10 +138,12 @@ BEGIN
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
     START TRANSACTION;
 
-    SELECT DISTINCT userid FROM ActiveUser INTO cur_user_id;
-    SELECT DISTINCT userid FROM UserAccounts WHERE username = u_username INTO friend_user_id;
-
-    IF EXISTS (SELECT DISTINCT userid FROM UserAccounts WHERE username = u_username) THEN
+    SELECT userid INTO cur_user_id FROM ActiveUser ORDER BY userid LIMIT 1;
+    SELECT DISTINCT userid INTO friend_user_id FROM UserAccounts WHERE username = u_username LIMIT 1;
+    SELECT friend_user_id;
+    IF EXISTS (SELECT DISTINCT userid1 FROM Friends WHERE ( userid1 = cur_user_id OR userid2 = cur_user_id ) AND ( userid1 = friend_user_id OR userid2 = friend_user_id ) ) THEN
+        SET success = 0;
+    ELSEIF EXISTS (SELECT DISTINCT userid FROM UserAccounts WHERE username = u_username) THEN
         SET success = 1;
         INSERT INTO Friends (userid1, userid2) VALUES (cur_user_id, friend_user_id);
     ELSE
@@ -163,8 +165,8 @@ BEGIN
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
     START TRANSACTION;
 
-    SELECT userid FROM ActiveUser INTO cur_user_id;
-    SELECT userid FROM UserAccounts WHERE username = u_username INTO friend_user_id;
+    SELECT userid INTO cur_user_id FROM ActiveUser ORDER BY userid LIMIT 1;
+    SELECT DISTINCT userid INTO friend_user_id FROM UserAccounts WHERE username = u_username LIMIT 1;
 
     IF EXISTS (
         SELECT * FROM (

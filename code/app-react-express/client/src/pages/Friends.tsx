@@ -12,7 +12,13 @@ interface FriendsProps {
 
 function Friends({ friends }: FriendsProps) {
   const [searchInput, setSearchInput] = useState(""); // State to hold the search input value
-  const [operationResult, setOperationResult] = useState<{ success: boolean; message: string } | null>(null);
+  // const [operationResult, setOperationResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  const [addFriendSuccess, setAddFriendSuccess] = useState(false); 
+  const [addFriendFailed, setAddFriendFailed] = useState(false); 
+
+  const [removeFriendSuccess, setRemoveFriendSuccess] = useState(false); 
+  const [removeFriendFailed, setRemoveFriendFailed] = useState(false);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value); // Update the search input value as the user types
@@ -25,24 +31,55 @@ function Friends({ friends }: FriendsProps) {
       if (!response.ok) {
         throw new Error("Failed to add friend");
       }
-      setOperationResult({ success: true, message: "Friend added successfully" });
+      
+      const data = await response.json();
+
+      if (data === 'Add friend success') {
+        setAddFriendSuccess(true);
+        setAddFriendFailed(false);
+        setRemoveFriendSuccess(false);
+        setRemoveFriendFailed(false);
+      } else {
+        setAddFriendSuccess(false);
+        setAddFriendFailed(true);
+        setRemoveFriendSuccess(false);
+        setRemoveFriendFailed(false);
+      }
     } catch (error) {
-      console.error("Error adding friend:", error);
-      setOperationResult({ success: false, message: "Failed to add friend" });
+      console.error("Error logging in:", error);
+      setAddFriendSuccess(false);
+      setAddFriendFailed(true);
+      setRemoveFriendSuccess(false);
+      setRemoveFriendFailed(false);
     }
   };
 
   const handleRemoveFriend = async (friendUsername: string) => {
     try {
-      const response = await fetch(`http://localhost:8080/removefriend?username=${friendUsername}`);
+      const response = await fetch(`http://localhost:8080/removefriend?tmp_username=${friendUsername}`);
       if (!response.ok) {
         throw new Error("Failed to remove friend");
       }
       
-      setOperationResult({ success: true, message: "Friend removed successfully" });
+      const data = await response.json();
+
+      if (data === 'Remove friend success') {
+        setRemoveFriendSuccess(true);
+        setRemoveFriendFailed(false);
+        setAddFriendSuccess(false);
+        setAddFriendFailed(false);
+      } else {
+        setRemoveFriendSuccess(false);
+        setRemoveFriendFailed(true);
+        setAddFriendSuccess(false);
+        setAddFriendFailed(false);
+      }
     } catch (error) {
-      console.error("Error removing friend:", error);
-      setOperationResult({ success: false, message: "Failed to remove friend" });
+      console.error("Error logging in:", error);
+      setRemoveFriendSuccess(false);
+      setRemoveFriendFailed(true);
+      setAddFriendSuccess(false);
+      setAddFriendFailed(false);
     }
   };
 
@@ -61,10 +98,11 @@ function Friends({ friends }: FriendsProps) {
               style={{ marginRight: '10px' }}
             />
             {/* Operation result message */}
-            {operationResult && (
-              <p style={{ color: operationResult.success ? 'green' : 'red', marginTop: '5px' }}>
-                {operationResult.message}
-              </p>
+            { (addFriendSuccess || removeFriendSuccess) && (
+              <p style={{ color: "green", marginTop: "10px" }}>Add/Remove Friend Successful!</p>
+            )}
+            { (addFriendFailed || removeFriendFailed) && (
+              <p style={{ color: "red", marginTop: "10px" }}>Add/Remove Friend failed!</p>
             )}
           </div>
           {/* Add Friend button */}
