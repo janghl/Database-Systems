@@ -45,9 +45,9 @@ app.get('/posts', (req, res) => {
   });
 });
 
-// Login endpoint (assuming using POST request)
-app.post('/login', (req, res) => {
-  const { tmp_username, tmp_pswrd } = req.body;
+// Login endpoint
+app.get('/login', (req, res) => {
+  const { tmp_username, tmp_pswrd } = req.query;
 
   // Check if the required parameters are provided
   if (!tmp_username || !tmp_pswrd) {
@@ -62,11 +62,8 @@ app.post('/login', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
-    res.json(results);
   });
 });
-
-
 
 // Use port 8080 by default, unless configured differently in Google Cloud
 const port = process.env.PORT || 8080;

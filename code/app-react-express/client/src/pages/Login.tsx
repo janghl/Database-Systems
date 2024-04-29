@@ -46,30 +46,36 @@ interface SubmitButtonProps {
   const SubmitButton: React.FC<SubmitButtonProps> = ({ handleSubmit }) => {
     return <button type="submit">Log in</button>;
   };
-  
-
 
 function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
+  const [loginSuccess, setLoginSuccess] = useState(false); // State to track login success
+  const [loginFailed, setLoginFailed] = useState(false); // State to track login success
 
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+  
     // Pass username and password to SQL query function or API endpoint
     console.log("Username:", username);
     console.log("Password:", password);
-
-    fetch("http://localhost:8080/login", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(['username', 'password'])
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));
+  
+    try {
+      const response = await fetch("http://localhost:8080/posts?tmp_username=" + username + "&tmp_pswrd=" + password);
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+      const data = await response.json();
+      console.log("Login success:", data);
+      setLoginSuccess(true); 
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setLoginFailed(true);
+    }
   };
+  
 
   return (
     <div className="screen">
@@ -81,6 +87,12 @@ function Login() {
           <PasswordTextbox setPassword={setPassword} />
           <SubmitButton handleSubmit={handleSubmit} />
         </form>
+        {loginSuccess && (
+          <p style={{ color: "green", marginTop: "10px" }}>Login successful!</p>
+        )}
+        {loginFailed && (
+          <p style={{ color: "red", marginTop: "10px" }}>Login failed!</p>
+        )}
         <p style={{ marginTop: '10px' }}>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>

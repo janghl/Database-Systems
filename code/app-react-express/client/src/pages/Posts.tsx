@@ -13,10 +13,10 @@ function Posts({ posts }: PostData) {
     <div className="screen">
       <NavBar />
       <div className="buttoncontainer">
-         <Button onClick={() => console.log('Username clicked')} label="Sort by Username" />
-         <Button onClick={() => console.log('Song clicked')} label="Sort by Song Name" />
-         <Button onClick={() => console.log('Artist clicked')} label="Sort by Artist" />
-         <Button onClick={() => console.log('Create clicked')} label="Create Post" />
+        <Button onClick={() => console.log('Username clicked')} label="Sort by Username" />
+        <Button onClick={() => console.log('Song clicked')} label="Sort by Song Name" />
+        <Button onClick={() => console.log('Artist clicked')} label="Sort by Artist" />
+        <Button onClick={() => console.log('Create clicked')} label="Create Post" />
       </div>
       <div className="postContainer">
         {posts.map((post, index) => (
