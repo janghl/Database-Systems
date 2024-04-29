@@ -85,12 +85,20 @@ function Login() {
     }
   };  
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log("Logged out");
-    setLoginSuccess(false);
-    setLoginFailed(false);
-    setUsername("");
-    setPassword("");
+    try {
+      const response = await fetch("http://localhost:8080/logout");
+      if (!response.ok) {
+        throw new Error("Failed to fetch music data");
+      }
+      setLoginSuccess(false);
+      setLoginFailed(false);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.error("Error fetching music data:", error);
+    }
   };
 
   return (

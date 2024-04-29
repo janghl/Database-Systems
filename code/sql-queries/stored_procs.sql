@@ -28,12 +28,12 @@ BEGIN
             IF NOT EXISTS (SELECT * FROM Logins WHERE userid = cur_id) THEN
                 -- Insert a new record into Logins
                 INSERT INTO Logins (userid, logintimes) VALUES (cur_id, 1);
-                INSERT INTO ActiveUser (userid) VALUES (cur_id);
             ELSE
                 -- Update the logintimes for the existing record
                 UPDATE Logins SET logintimes = logintimes + 1 WHERE userid = cur_id;
             END IF;
             -- Account found
+            INSERT INTO ActiveUser (userid) VALUES (cur_id);
             SET success = 1;
         ELSE
             -- Wrong password

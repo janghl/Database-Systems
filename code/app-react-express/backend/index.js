@@ -96,6 +96,18 @@ app.get('/ratingsearch', (req, res) => {
   });
 });
 
+app.get('/logout', (req, res) => {
+  const rating = req.query.rating; // Assuming the song name is passed as a query parameter
+  connection.query("DELETE FROM ActiveUser", (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 // Login endpoint
 app.get('/login', (req, res) => {
   const { tmp_username, tmp_pswrd } = req.query;
