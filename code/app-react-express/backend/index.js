@@ -45,6 +45,19 @@ app.get('/posts', (req, res) => {
   });
 });
 
+// GET all post data that have the artist name
+app.get('/artistsearch', (req, res) => {
+  const artistName = req.query.artistName; // Assuming the artist name is passed as a query parameter
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` WHERE artistname = ? LIMIT 30", [artistName], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 // Login endpoint (assuming using POST request)
 app.post('/login', (req, res) => {
   const { tmp_username, tmp_pswrd } = req.body;

@@ -1,15 +1,7 @@
 import React from "react";
-
-interface SidePanelProps {
-  onClose: () => void;
-}
-
-const SidePanel: React.FC<SidePanelProps> = ({ onClose }) => {
+function SidePanel() {
   return (
     <div className="side-panel">
-      <button className="close-btn" onClick={onClose}>
-        X
-      </button>
       <div
         className="side-panel-content"
         style={{ height: "800px", overflowY: "auto" }}
@@ -57,6 +49,6 @@ const SidePanel: React.FC<SidePanelProps> = ({ onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SidePanel;

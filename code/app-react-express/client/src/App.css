@@ -331,6 +331,8 @@
   justify-content: center;
   position: relative;
   overflow-y: auto;
+  padding: 30px;
+  
 }
 
 .aboutsize {
