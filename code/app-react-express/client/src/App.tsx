@@ -7,6 +7,7 @@ import Music from "./pages/Music";
 import Friends from "./pages/Friends";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Create from "./pages/Create";
 
 import React, { useState, useEffect } from "react";
 import About from "./pages/About";
@@ -99,6 +100,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
+        <Route path="/create" element={<Create />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Button from "../components/Button";
 
 interface UsernameTextboxProps {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
@@ -84,6 +85,14 @@ function Login() {
     }
   };  
 
+  const handleLogout = () => {
+    console.log("Logged out");
+    setLoginSuccess(false);
+    setLoginFailed(false);
+    setUsername("");
+    setPassword("");
+  };
+
   return (
     <div className="screen">
       <NavBar />
@@ -103,6 +112,9 @@ function Login() {
         <p style={{ marginTop: '10px' }}>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "10px"}}>
+            <Button clickFunction={handleLogout} text="Logout"></Button>
       </div>
     </div>
   );

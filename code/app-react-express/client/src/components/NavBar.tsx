@@ -45,6 +45,11 @@ function NavBar() {
                   About
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="create">
+                  Create
+                </a>
+              </li>
               <li className="nav-item" style={{ marginLeft: "650px" }}>
                 <a className="nav-link" href="login">
                   Login
