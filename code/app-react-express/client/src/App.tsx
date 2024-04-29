@@ -88,7 +88,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<Posts posts={posts} />} />{" "}
+        <Route path="/posts" element={<Posts />} />{" "}
         {/* Pass post data as props to Posts component */}
         <Route path="/artists" element={<Artists artists={artists} />} />{" "}
         {/* Pass artists data as props to Artists component */}
