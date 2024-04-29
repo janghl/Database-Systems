@@ -146,6 +146,8 @@ app.get('/login', (req, res) => {
   });
 });
 
+
+
 // Signup endpoint
 app.get('/signup', (req, res) => {
   const { tmp_username, tmp_pswrd } = req.query;
@@ -292,6 +294,31 @@ app.get('/removefriend', (req, res) => {
         res.send(JSON.stringify('Remove friend failed'));
       }
     });
+  });
+});
+
+app.post('/createpost', (req, res) => {
+  const { songName, artist, rating } = req.body;
+
+  if (!songName || !artist || !rating) {
+    res.status(400).send('Required fields are missing');
+    return;
+  }
+
+  connection.query('CALL createpost(?, ?, ?)', [songName, artist, rating], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    const success = results[0]('@success');
+    
+    if (success) {
+      res.send(JSON.stringify(success)); // Send success message
+    } else {
+      res.status(500).send('Error creating post'); // Send error message if no success message found
+    }
   });
 });
 
