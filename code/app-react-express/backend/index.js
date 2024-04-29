@@ -312,13 +312,13 @@ app.get('/removefriend', (req, res) => {
 
 app.post('/createpost', (req, res) => {
   console.log(req);
-  const { songName, artist, rating } = req.body;
+  const { songName, artist, rating } = req.query;
   if (!songName || !artist || !rating) {
     res.status(400).send('Required fields are missing');
     return;
   }
 
-  connection.query('CALL createpost(?, ?, ?)', [songName, artist, rating], (err, results) => {
+  connection.query('CALL createpost(?, ?, ?, @success)', [songName, artist, rating], (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Internal Server Error');

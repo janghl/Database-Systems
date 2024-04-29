@@ -2,10 +2,7 @@ import React from "react";
 function SidePanel() {
   return (
     <div className="side-panel">
-      <div
-        className="side-panel-content"
-        style={{ height: "800px", overflowY: "auto" }}
-      >
+      <div className="side-panel-content" style={{ height: "145vh" }}>
         <div className="panel-block">
           <div>
             <p className="panel-text">Michael Rheintgen</p>
