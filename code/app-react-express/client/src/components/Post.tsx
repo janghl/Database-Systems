@@ -20,7 +20,7 @@ function Post({ SongName, UserName, Artist, TimeOfPost, Rating }: PostProps) {
       2: "https://i.imgur.com/YPxzNGe.png",
       3: "https://i.imgur.com/0B5SeCt.png",
       4: "https://i.imgur.com/YhQtKmk.png",
-      5: "https://i.imgur.com/9V64Cbu.png"
+      5: "https://i.imgur.com/9V64Cbu.png",
     };
 
     return ratingImages[Rating];
@@ -29,10 +29,15 @@ function Post({ SongName, UserName, Artist, TimeOfPost, Rating }: PostProps) {
   return (
     <div className="post">
       <h2>{UserName}</h2>
-      <h1>{SongName} by {Artist}</h1>
+      <h1>
+        {SongName} by {Artist}
+      </h1>
       <p>{TimeOfPost}</p>
       <img src={getImageUrl()} alt={`Rating ${Rating}`} />
-      <div className="button-container" style = {{marginLeft: '800px', marginTop: '-30px'}}>
+      <div
+        className="button-container"
+        style={{ marginLeft: "800px", marginTop: "-30px" }}
+      >
         <button>Edit</button>
         <button>Delete</button>
       </div>

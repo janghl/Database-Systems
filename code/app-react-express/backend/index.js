@@ -49,6 +49,47 @@ app.get('/posts', (req, res) => {
 app.get('/login', (req, res) => {
   const { tmp_username, tmp_pswrd } = req.query;
 
+  
+// GET all post data that have the artist name
+app.get('/artistsearch', (req, res) => {
+  const artistName = req.query.artistName; // Assuming the artist name is passed as a query parameter
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` WHERE artistname LIKE CONCAT('%', ?, '%') LIMIT 30", [artistName], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// GET all post data that have the song name
+app.get('/songsearch', (req, res) => {
+  const songName = req.query.songName; // Assuming the song name is passed as a query parameter
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` WHERE songname LIKE CONCAT('%', ?, '%') LIMIT 30", [songName], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// GET all post data that have the song name
+app.get('/ratingsearch', (req, res) => {
+  const rating = req.query.rating; // Assuming the song name is passed as a query parameter
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` WHERE rating LIKE CONCAT('%', ?, '%') LIMIT 30", [rating], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
   // Check if the required parameters are provided
   if (!tmp_username || !tmp_pswrd) {
     res.status(400).send('Username or password is missing');
