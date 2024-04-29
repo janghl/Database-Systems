@@ -1,42 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Post from "../components/Post";
 import Button from "../components/LoginButton";
 import SearchBar from "../components/SearchBar";
 
-interface PostsProps {
-  posts: PostData[];
-}
+function Posts() {
+  const [posts, setPosts] = useState<PostData[]>([]);
 
-export interface PostData {
-  songname: string;
-  username: string;
-  artistname: string;
-  timeofpost: string; // Assuming it's a string, adjust the type if it's different
-  rating: number; // Assuming it's a number, adjust the type if it's different
-}
-
-const Posts: React.FC<PostsProps> = ({ posts }) => {
-  const [searchResults, setSearchResults] = useState<any[]>([]); // Initialize state for search results
-
-function handleSearch(squery: string) {
-  fetch(`/artistsearch?artistName=${encodeURIComponent(squery)}`)
-    .then((response) => {
+  // Function to fetch posts data from backend
+  const fetchPostsData = async () => {
+    console.log("trying to get post data");
+    try {
+      const response = await fetch("http://localhost:8080/posts");
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("Failed to fetch posts data");
       }
-      return response.json();
-    })
-    .then((data) => {
-      // Set search results state with the retrieved data
-      setSearchResults(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
+      const data = await response.json();
+      setPosts(data); // Update state with fetched artists data
+    } catch (error) {
+      console.error("Error fetching posts data:", error);
+    }
+  };
 
-function Posts({ posts }: PostData) {
+  // Function to fetch posts data from backend
+  const filterPostsByArtist = async (artistName: string) => {
+    console.log("trying to filter post data by artist");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/artistsearch?artistName=${encodeURIComponent(
+          artistName
+        )}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to filter posts data by artist");
+      }
+      const data = await response.json();
+      setPosts(data); // Update state with fetched artists data
+    } catch (error) {
+      console.error("Error filtering posts data by artist:", error);
+    }
+  };
+
+  // Function to handle search based on artist name
+  const handleSearch = (artistName: string) => {
+    if (artistName.trim() === "") {
+      // If search query is empty, fetch all posts
+      fetchPostsData();
+    } else {
+      // Otherwise, fetch posts by artist
+      filterPostsByArtist(artistName);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch all posts data when component mounts
+    fetchPostsData();
+  }, []);
+
   console.log(posts);
   return (
     <div className="screen">
