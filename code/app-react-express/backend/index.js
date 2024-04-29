@@ -96,6 +96,19 @@ app.get('/ratingsearch', (req, res) => {
   });
 });
 
+// GET all post data that have the song name
+app.get('/usersearch', (req, res) => {
+  const userName = req.query.userName; // Assuming the song name is passed as a query parameter
+  connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` WHERE username LIKE CONCAT('%', ?, '%') LIMIT 30", [userName], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 app.get('/logout', (req, res) => {
   const rating = req.query.rating; // Assuming the song name is passed as a query parameter
   connection.query("DELETE FROM ActiveUser", (err, results) => {

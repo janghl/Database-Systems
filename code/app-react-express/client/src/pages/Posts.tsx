@@ -80,6 +80,25 @@ function Posts() {
     }
   };
 
+  // Function to fetch posts data from backend
+  const filterPostsByUser = async (userName: string) => {
+    console.log("trying to filter post data by user");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/usersearch?userName=${encodeURIComponent(
+          userName
+        )}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to filter posts data by user");
+      }
+      const data = await response.json();
+      setPosts(data); // Update state with fetched artists data
+    } catch (error) {
+      console.error("Error filtering posts data by user:", error);
+    }
+  };
+
   // Function to handle search based on artist name
   function handleSearchByArtist(artistName: string) {
     if (artistName.trim() === "") {
@@ -113,6 +132,17 @@ function Posts() {
     }
   }
 
+  // Function to handle search based on artist name
+  function handleSearchByUser(userName: string) {
+    if (userName.trim() === "") {
+      // If search query is empty, fetch all posts
+      fetchPostsData();
+    } else {
+      // Otherwise, fetch posts by artist
+      filterPostsByUser(userName);
+    }
+  }
+
   useEffect(() => {
     // Fetch all posts data when component mounts
     fetchPostsData();
@@ -134,6 +164,11 @@ function Posts() {
         />
         <div style={{ marginRight: "10px" }} />
         <SearchBar onSearch={handleSearchBySong} placeholder="Filter By Song" />
+        <div style={{ marginRight: "10px" }} />
+        <SearchBar
+          onSearch={handleSearchByUser}
+          placeholder="Filter By username"
+        />
       </div>
       <div className="postContainer">
         {posts.map((post, index) => (
@@ -152,4 +187,3 @@ function Posts() {
 }
 
 export default Posts;
-
