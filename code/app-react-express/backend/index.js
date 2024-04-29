@@ -56,11 +56,6 @@ app.get('/posts', (req, res) => {
     res.json(results);
   });
 });
-
-// Login endpoint
-app.get('/login', (req, res) => {
-  const { tmp_username, tmp_pswrd } = req.query;
-
   
 // GET all post data that have the artist name
 app.get('/artistsearch', (req, res) => {
@@ -101,6 +96,9 @@ app.get('/ratingsearch', (req, res) => {
   });
 });
 
+// Login endpoint
+app.get('/login', (req, res) => {
+  const { tmp_username, tmp_pswrd } = req.query;
 
   // Check if the required parameters are provided
   if (!tmp_username || !tmp_pswrd) {

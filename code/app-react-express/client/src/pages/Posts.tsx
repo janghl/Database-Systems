@@ -25,6 +25,7 @@ function Posts() {
   // Function to fetch posts data from backend
   const filterPostsByArtist = async (artistName: string) => {
     console.log("trying to filter post data by artist");
+    console.log(artistName);
     try {
       const response = await fetch(
         `http://localhost:8080/artistsearch?artistName=${encodeURIComponent(
