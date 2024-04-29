@@ -33,6 +33,18 @@ app.get('/artists', (req, res) => {
   });
 });
 
+// GET all music data for initial display
+app.get('/music', (req, res) => {
+  connection.query("SELECT songname, len, popularity FROM `ihd`.`Songs`", (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 // GET all post data for initial display
 app.get('/posts', (req, res) => {
   connection.query("SELECT songname, username, artistname, rating, timeofpost FROM `ihd`.`Posts` NATURAL JOIN `ihd`.`HasSongs` NATURAL JOIN `ihd`.`Songs` NATURAL JOIN `ihd`.`UserAccounts` NATURAL JOIN `ihd`.`Artists` LIMIT 30", (err, results) => {
@@ -116,6 +128,114 @@ app.get('/signup', (req, res) => {
         res.send(JSON.stringify('Signup success'));
       } else {
         res.send(JSON.stringify('Signup failed'));
+      }
+    });
+  });
+});
+
+// friends endpoint
+app.get('/friends', (req, res) => {
+
+  connection.query(
+    `SELECT DISTINCT u.username
+    FROM UserAccounts u
+    JOIN Friends f ON u.userid = f.userid2
+    WHERE f.userid1 IN (SELECT userid FROM ActiveUser)
+    UNION
+    SELECT DISTINCT u2.username
+    FROM UserAccounts u2
+    JOIN Friends f2 ON u2.userid = f2.userid1
+    WHERE f2.userid2 IN (SELECT userid FROM ActiveUser);
+    `,
+    (err, results) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      // Check if friends are found
+      if (results.length === 0) {
+        res.status(404).send('User not found or has no friends');
+        return;
+      }
+
+      // Send the list of friends in the response
+      res.json(results);
+    }
+  );
+});
+
+app.get('/addfriend', (req, res) => {
+
+  const { tmp_username } = req.query;
+
+  console.log(tmp_username);
+  // Check if the required parameters are provided
+  if (!tmp_username) {
+    res.status(400).send('Username or password is missing');
+    return;
+  }
+
+  connection.query('CALL AddFriend(?, @success)', [tmp_username], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    // Retrieve the value of the output parameter
+    connection.query('SELECT @success', (err, results2) => {
+      if (err) {
+        console.error('Error retrieving output parameter:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      var success = results2[0]['@success'];
+      console.log(success);
+      // Check the value of account_found and send appropriate response
+      if (success === 1) {
+        res.send(JSON.stringify('Add friend success'));
+      } else {
+        res.send(JSON.stringify('Add friend failed'));
+      }
+    });
+  });
+});
+
+app.get('/removefriend', (req, res) => {
+
+  const { tmp_username } = req.query;
+
+  // Check if the required parameters are provided
+  if (!tmp_username) {
+    res.status(400).send('Username or password is missing');
+    return;
+  }
+
+  connection.query('CALL RemoveFriend(?, @success)', [tmp_username], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    // Retrieve the value of the output parameter
+    connection.query('SELECT @success', (err, results2) => {
+      if (err) {
+        console.error('Error retrieving output parameter:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      var success = results2[0]['@success'];
+
+      // Check the value of account_found and send appropriate response
+      if (success === 1) {
+        res.send(JSON.stringify('Add friend success'));
+      } else {
+        res.send(JSON.stringify('Add friend failed'));
       }
     });
   });
