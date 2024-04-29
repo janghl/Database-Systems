@@ -5,15 +5,42 @@ function CreatePost() {
   const [artist, setArtist] = useState("");
   const [rating, setRating] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Song Name:", songName);
     console.log("Artist:", artist);
     console.log("Rating:", rating);
-    setSongName("");
-    setArtist("");
-    setRating(0);
+  
+    try {
+      const response = await fetch("http://localhost:8080/createpost", {
+        method: "POST", // Assuming you're sending data via POST
+        headers: {
+          "Content-Type": "application/json", // Assuming you're sending JSON data
+        },
+        body: JSON.stringify({ // Assuming you're sending songName, artist, and rating as JSON data
+          songName: songName,
+          artist: artist,
+          rating: rating,
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+  
+      // Handle response from the server if needed
+      const responseData = await response.json();
+      console.log("Response from server:", responseData);
+  
+      // Reset form fields after successful submission
+      setSongName("");
+      setArtist("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
+  
 
   return (
     <div
