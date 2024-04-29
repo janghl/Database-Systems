@@ -311,8 +311,8 @@ app.get('/removefriend', (req, res) => {
 });
 
 app.post('/createpost', (req, res) => {
+  console.log(req);
   const { songName, artist, rating } = req.body;
-
   if (!songName || !artist || !rating) {
     res.status(400).send('Required fields are missing');
     return;

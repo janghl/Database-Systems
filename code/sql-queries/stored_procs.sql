@@ -205,14 +205,13 @@ BEGIN
     SELECT COUNT(*) INTO next_post_id FROM Posts;
     SET next_post_id = next_post_id + 1;
 
-    SELECT NOW() INTO cur_timeofpost;
+    -- SELECT NOW() INTO cur_timeofpost;
     
-    INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, cur_timeofpost, 0, cur_user_id, cur_song_id);
+    INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, 1, 0, cur_user_id, cur_song_id);
+    -- INSERT INTO Posts (postid, rating, timeofpost, likes, userid, songid) VALUES (next_post_id, u_rating, cur_timeofpost, 0, cur_user_id, cur_song_id);
     SET success = 1;
 
     COMMIT;   
 END;
 //
 DELIMITER ;
-
-

@@ -17,7 +17,7 @@ BEGIN
     DECLARE cur_artistname VARCHAR(50) DEFAULT NULL;
 
     -- Select the artistname based on the songid of the inserted post
-    SET cur_artistname = (SELECT artistname FROM HasSongs WHERE songid = NEW.songid);
+    SET cur_artistname = (SELECT artistname FROM HasSongs NATURAL JOIN Artists WHERE songid = NEW.songid);
 
     -- Check if cur_artistname is not null and perform the update
     IF cur_artistname IS NOT NULL THEN
