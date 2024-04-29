@@ -12,7 +12,7 @@ function CreatePost() {
     console.log("Rating:", rating);
   
     try {
-      const response = await fetch(`http://localhost:8080/createpost?songname=${songName}&artist=${artist}&rating=${rating}`, {
+      const response = await fetch(`http://localhost:8080/createpost?songName=${songName}&artist=${artist}&rating=${rating}`, {
         method: "POST", // Assuming you're sending data via POST
         headers: {
           "Content-Type": "application/json", // Assuming you're sending JSON data
