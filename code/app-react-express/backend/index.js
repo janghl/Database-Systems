@@ -5,9 +5,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors'); // Import the cors middleware
 var connection = mysql.createConnection({
-  host: '34.170.173.137', 
+  host: 'localhost', 
   user: 'root',
-  password: 'root',
   database: 'ihd'
 });
 
